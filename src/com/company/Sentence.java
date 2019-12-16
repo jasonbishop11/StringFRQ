@@ -29,10 +29,16 @@ public class Sentence {
 			for (int i = 0; i < n; i++) {
 				start = modWord.indexOf(str);
 				if (start > -1) {
-					modWord = modWord.substring(start+str.length()-1);
+					modWord = modWord.substring(start);
+				} else if (start == 0){
+					return 0;
 				}
 			}
-			return currSent.indexOf(modWord);
+			if (modWord != currSent){
+				return currSent.indexOf(modWord);
+			}else{
+				return -1;
+			}
 		}else {
 			return -1;
 		}
@@ -45,9 +51,9 @@ public class Sentence {
 	 */
 	public void replaceNthTime(String str, int n, String repl) {
 		int location = findNthTime(str, n);
-		if (location != -1) {
+		if (location > -1) {
 			String frontWord = currSent.substring(0, location);
-			String backWord = currSent.substring(location-str.length());
+			String backWord = currSent.substring(location+str.length());
 			currSent = frontWord + repl + backWord;
 		}
 	}
@@ -83,10 +89,12 @@ public class Sentence {
 		System.out.println(sentence3);
 
 		Sentence sentence4 = new Sentence("aaaa");
+		System.out.println(sentence4.findNthTime("aa",1));
 		sentence4.replaceNthTime("aa", 1, "xx");
 		System.out.println(sentence4);
 
 		Sentence sentence5 = new Sentence("aaaa");
+		System.out.println(sentence5.findNthTime("aa",2));
 		sentence5.replaceNthTime("aa", 2, "bbb");
 		System.out.println(sentence5);
 
