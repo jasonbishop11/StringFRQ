@@ -16,7 +16,9 @@ public class ErrorLog {
 	 * contains keyword; false otherwise.
 	 */
 	public boolean containsKey(String keyword) {
-	    if ()
+	    if (machineId.contains(keyword) || description.contains(keyword)){
+			return true;
+		}else{return false;}
 	}
 
 	public String getMachineId() { return machineId;}
