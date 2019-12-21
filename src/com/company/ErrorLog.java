@@ -16,8 +16,24 @@ public class ErrorLog {
 	 * contains keyword; false otherwise.
 	 */
 	public boolean containsKey(String keyword) {
-	    if (machineId.contains(keyword) || description.contains(keyword)){
-			return true;
+	    if (description.contains(keyword)){
+	    	int location = description.indexOf(keyword);
+			boolean isFirstChar = false;
+			boolean isLastChar = false;
+	    	if(location == 0){
+	    		isFirstChar = false;
+			}else if(Character.isLetterOrDigit(description.charAt(location-1)) || !Character.isWhitespace(description.charAt(location-1))){
+	    		isFirstChar = true;
+			}
+	    	if(location == description.length()-keyword.length()){
+	    		isLastChar = false;
+			}else if(Character.isLetterOrDigit(description.charAt(location+keyword.length())) || !Character.isWhitespace((description.charAt(location+keyword.length())))){
+	    		isLastChar = true;
+			}
+	    	if(!isFirstChar && !isLastChar){
+	    		return true;
+			}
+			return false;
 		}else{return false;}
 	}
 
@@ -38,8 +54,15 @@ public class ErrorLog {
 		System.out.println("message 4 " + er4.containsKey("disk"));
 		System.out.println("message 5 " + er5.containsKey("disk"));
 		System.out.println("message 6 " + er6.containsKey("disk"));
-
-
 	}
 
 }
+/*
+Output
+message 1 false
+message 2 true
+message 3 false
+message 4 true
+message 5 true
+message 6 false
+ */

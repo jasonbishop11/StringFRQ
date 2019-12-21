@@ -32,9 +32,8 @@ public class Sentence {
 					modWord = modWord.substring(start+str.length());
 				} else{return -1;}
 			}
-			System.out.println(modWord + "," + start);
 			if (modWord != currSent){
-				return currSent.indexOf(modWord);
+				return currSent.indexOf(str+modWord);
 			}else{
 				return 0;
 			}
@@ -80,11 +79,11 @@ public class Sentence {
 		}
 		Sentence finalSentence = new Sentence(revSentence);
 		int location = finalSentence.findNthTime(revStr, 1);
-		int answer = currSent.length()-location+1;
+		int answer = currSent.length()-location;
 		if (location==-1){
 			return -1;
 		}
-		return answer;
+		return answer-str.length();
 	}
 
 	public static void main(String[] args) {
@@ -125,3 +124,21 @@ public class Sentence {
 	}
 
 }
+/*
+Output
+3
+A crane ate late.
+-1
+A cat ate late.
+11
+A cat ate lxxe.
+-1
+A cat ate late.
+0
+xxaa
+0
+bbbaa
+11
+2
+-1
+ */
